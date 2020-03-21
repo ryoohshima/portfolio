@@ -1,9 +1,9 @@
  /*全体に反映
 ------------------------------------------------------------------------------*/
-/**/
-/*=============================================
+
+/*=============
 レスポンシブ対応
-=============================================*/
+=============*/
 @mixin sp {
     @media screen and (max-width: 678px) {
         @content;
@@ -16,9 +16,9 @@
     }
 }
 
-/*=============================================
+/*=============
 共通設定
-=============================================*/
+=============*/
 
 /*h2大外の囲い*/
 @mixin wrapper {
@@ -78,10 +78,14 @@ a:visited{color: black;}
     }
 }
 
+/*------------------------------------------------------------------------------
+本体
+------------------------------------------------------------------------------*/
+
 /*header
 ------------------------------------------------------------------------------*/
 header {
-    width: 100%;
+    width: 100vw;
     height: 70px;
     background-color: none;
     transition: all 0.5s ease;
@@ -102,14 +106,14 @@ header {
             @include sp {
                 width: 80%;
             }
-            .headTitle1 {
+            .headMainTitle {
                 font-size: 1.2em;
                 @include tab {
                     font-size: none;
                 }
                 margin-top: -0px;
             }
-            .headTitle2 {
+            .headSubTitle {
                 margin-top: -25px;
             }
         }
@@ -130,7 +134,8 @@ header {
                 @include list;
                 li {
                     width: 25%;
-                    padding-right: 5%;
+                    height: 100%;
+                    text-align: center;
                 }
             }
         }
@@ -247,21 +252,6 @@ header {
         width: 100%;
         margin: 50px auto;
     }
-    /*
-    .mainTitle {
-        position: absolute;
-        top: 30%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-        margin:0;
-        padding:0;
-        font-size: 2em;
-        .mainTitle2 {
-            margin-top: -80px;
-            text-align: center;
-        }
-    }
-    */
 }
 
 /*about
