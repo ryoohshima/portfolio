@@ -1,0 +1,434 @@
+ /*全体に反映
+------------------------------------------------------------------------------*/
+
+/*=============
+レスポンシブ対応
+=============*/
+@mixin sp {
+    @media screen and (max-width: 678px) {
+        @content;
+    }
+}
+
+@mixin tab {
+    @media screen and (max-width: 1024px) {
+        @content;
+    }
+}
+
+/*=============
+共通設定
+=============*/
+
+/*h2大外の囲い*/
+@mixin wrapper {
+    margin-top: 100px;
+    width: 100%;
+}
+
+/*アイコン用*/
+@mixin icon($color, $position) {
+    background-color: $color;
+    border-radius: 50%;
+    i {
+        padding: 15px;
+        color: white;
+    }
+    &:hover {
+        top: $position;
+        transition: all 0.2s ease;
+    }
+}
+
+/*リストスタイル*/
+@mixin list {
+    li {
+        list-style: none;
+    }
+    a {
+        text-decoration: none;
+        cursor: pointer;
+    }
+}
+
+/*カラー*/
+$mainColor:#5a79ba;
+
+/*フォント*/
+body {
+    font-family: imagine YOKOHAMA;
+}
+
+/*リンク*/
+a:link{color: black;}
+a:visited{color: black;}
+
+/*中タイトル*/
+.middleTitle {
+    width: 200px;
+    margin: 0 auto;
+    text-align: center;
+    h2 {
+        display: inline-block;
+        font-size: 2em;
+        @include tab {
+            font-size: 1.8em;
+        }
+        border-bottom: dotted 5px $mainColor;
+    }
+}
+
+/*------------------------------------------------------------------------------
+本体
+------------------------------------------------------------------------------*/
+
+/*header
+------------------------------------------------------------------------------*/
+header {
+    width: 100vw;
+    height: 70px;
+    background-color: none;
+    transition: all 0.5s ease;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    .headerWrapper {
+        max-width: 1000px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: row;
+        .headTitle {
+            font-size: 15px;
+            width: 50%;
+            @include tab {
+                margin-left: 5px;
+            }
+            @include sp {
+                width: 80%;
+            }
+            .headMainTitle {
+                font-size: 1.2em;
+                @include tab {
+                    font-size: none;
+                }
+                margin-top: -0px;
+            }
+            .headSubTitle {
+                margin-top: -25px;
+            }
+        }
+/*pcNavigation
+-----------------------------------------*/
+        nav {
+            width: 50%;
+            @include tab {
+                width: 70%;
+            }
+            @include sp {
+                display: none;
+            }
+            ul {
+                display: flex;
+                flex-direction: row;
+                text-align: right;
+                @include list;
+                li {
+                    width: 25%;
+                    height: 100%;
+                    text-align: center;
+                }
+            }
+        }
+/*spNavigation
+-----------------------------------------*/
+        .nav {
+            width: 20%;
+            display: none;
+            @include sp {
+                display: block;
+                position: relative;
+                #navInput:checked ~ #navClose {
+                    display: block;
+                }
+                #navInput:checked ~ #navList {
+                    transform: translateX(0);
+                    -moz-transform: translateX(0);
+                    -webkit-transform: translateX(0);
+                }
+                .navUnshown {
+                    display: none;
+                }
+                #navOpen {
+                    display: inline-block;
+                    width: 100%;
+                    height: 30px;
+                    vertical-align: middle;
+                    padding: 20px;
+                    z-index: 1000;
+                    span, span::before, span::after {
+                        position: absolute;
+                        width: 30px;
+                        height: 3px;
+                        border-radius: 3px;
+                        background-color: black;
+                        display: block;
+                        content: '';
+                        cursor: pointer;
+                    }
+                    span::before {
+                        bottom: -10px;
+                    }
+                    span::after {
+                        bottom: -20px;
+                    }
+                }
+                #navClose {
+                    position: fixed;
+                    z-index: 100;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: $mainColor;
+                    opacity: 0.5;
+                    transition: all 0.3s ease;
+                }
+                #navList {
+                    width: 50vw;
+                    height: 100vh;
+                    background-color: $mainColor;
+                    color: white;
+                    list-style: none;
+                    text-decoration: none;
+                    position: fixed;
+                    top: 0;
+                    right: 0;
+                    transition: .3s ease-in-out;
+                    transform: translateX(105%);
+                    -moz-transform: translateX(105%);
+                    -webkit-transform: translateX(105%);
+                    z-index: 1000;
+                    ul {
+                        @include list;
+                        li {
+                            margin-bottom: 5%;
+                            a {
+                                color: white;
+                            }
+                        }
+                    }
+                    .twitter {
+                        width: 100%;
+                        padding-left: 40px;
+                        i {
+                            color: white;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/*main
+------------------------------------------------------------------------------*/
+.main {
+    width: 1000px;
+    margin: 0 auto;
+    @include tab {
+        width: 100%;
+    }
+}
+
+/*mainVisual
+-----------------------------------------*/
+.mainVisual {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    position: relative;
+    padding-top: 70px;
+    img {
+        width: 100%;
+        margin: 50px auto;
+    }
+}
+
+/*about
+-----------------------------------------*/
+.about {
+    @include wrapper;
+    .aboutWrapper {
+        display: flex;
+        flex-direction: row;
+        width: 75%;
+        @include tab {
+            width: 100%;
+        }
+        @include sp {
+            display: block;
+        }
+        margin: 0 auto;
+        position: relative;
+        .aboutVisual {
+            width: 40%;
+            @include tab {
+                width: 250px;
+            }
+            @include sp {
+                margin: 0 auto;
+            }
+            img {
+                display: block;
+                width: 80%;
+                margin: 0 auto;
+                border-radius: 50%;
+                @include tab {
+                    width: 200px;
+                }
+            }
+            .twitter {
+                @include icon(skyblue, 82%);
+                position: absolute;
+                top: 80%;
+                left: 27%;
+                @include tab {
+                    top: 170px;
+                    left: 30px;
+                    i:active {
+                        top: 160px;
+                    }
+                }
+                @include sp {
+                    display: none;
+                }
+            }
+        }
+        .aboutContents {
+            width: 60%;
+            span {
+                font-size: 1.5em;
+            }
+            @include tab {
+                padding-right: 5%;
+            }
+            @include sp {
+                width: 80%;
+                margin: 10% auto 0 auto;
+            }
+
+        }
+    }
+}
+
+/*skills
+-----------------------------------------*/
+.skills {
+    @include wrapper;
+    .skillList {
+        display: flex;
+        flex-direction: row;
+        @include sp {
+            display: block;
+        }
+        section {
+            width: 30%;
+            margin: 0 auto;
+            @include sp {
+                width: 80%;
+                margin-bottom: 10%;
+            }
+            img {
+                display: block;
+                width: 80%;
+                margin: 0 auto;
+            }
+            h3 {
+                text-align: center;
+            }
+        }
+    }
+}
+
+/*works
+-----------------------------------------*/
+.works {
+    @include wrapper;
+    .workList {
+        display: flex;
+        flex-wrap: wrap;
+        section {
+            width: 48%;
+            margin: 1% auto;
+            @include sp {
+                width: 80%;
+            }
+            img {
+                width: 100%;
+                &:active {
+                    opacity: 0.5;
+                }
+            }
+            &:hover {
+                opacity: 0.5;
+                transition: all 1s ease;
+            }
+        }
+    }
+}
+
+/*contact
+-----------------------------------------*/
+.contact {
+    @include wrapper;
+    height: 300px;
+    .contactList {
+        p {
+            margin-left: 25%;
+            @include sp {
+                margin-left: 10%;
+            }
+            a:link {
+                color: $mainColor;
+                opacity: 0.5;
+            }
+            a:visited {
+                color: $mainColor;
+                opacity: 0.3;
+            }
+        }
+    }
+}
+
+/*toTop
+-----------------------------------------*/
+.toTop {
+    width: 100%;
+    height: 100px;
+    .toTopBtn {
+        background-color: $mainColor;
+        width: 50px;
+        height: 50px;
+        margin: 0 auto;
+        text-align: center;
+        border-radius: 50px;
+        a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.5em;
+            display: block;
+        }
+    }
+}
+
+/*footer
+------------------------------------------------------------------------------*/
+footer {
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    p {
+        display: block;
+        padding-top: 45px;
+    }
+}
