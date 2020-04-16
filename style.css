@@ -17,9 +17,6 @@
   font-size: 170px;
   margin: 0 auto;
   color: #ffffff;
-}
-
-.opening-name, .opening-title, .opening-job {
   display: none;
 }
 
@@ -303,14 +300,4 @@ header {
   background-color: transparent;
   font-size: 25px;
   color: #ffffff;
-}
-
-/* ====== footer ====== */
-footer {
-  width: 100vw;
-  padding-bottom: 10px;
-  position: fixed;
-  text-align: center;
-  color: #ffffff;
-  bottom: 0;
 }
