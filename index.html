@@ -14,6 +14,7 @@
         <link rel="stylesheet" type="text/css" href="style.css">
         <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
         <script src="jquery-3.4.1.min.js"></script>
+        <script src="jquery.cookie.js"></script>
     </head>
     <body>
         <!-- opening -->
@@ -35,15 +36,13 @@
         <div class="home">
             <video src="image/default/background-movie.MOV" poster="image/default/background-image.jpg" autoplay loop muted></video>
             <div class="home-wrapper">
-                <div class="home-menu">
-                    <p>MENU</p>
-                    <ul>
-                        <li>×</li>
-                        <li>about</li>
-                        <li>skills</li>
-                        <li>works</li>
-                        <li>contact</li>
-                    </ul>
+                <div class="menu-list">
+                    <button class="menu-button">MENU</button>
+                    <button class="about-button hide-button" data-id="about">about</button>
+                    <button class="skills-button hide-button" data-id="skills">skills</button>
+                    <button class="works-button hide-button" data-id="works">works</button>
+                    <button class="contact-button hide-button" data-id="contact">contact</button>
+                    <button class="close-button hide-button">close</button>
                 </div>
             </div>
         </div>

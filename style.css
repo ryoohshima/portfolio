@@ -1,7 +1,8 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: "851マカポップ";
+  font-family: "Sudbury Light", "ヒラギノ明朝 ProN";
+  font-style: italic;
 }
 
 /* ====== opening ====== */
@@ -48,14 +49,14 @@ header {
 
 .home-button {
  width: 150px;
- height: 40px;
+ height: 30px;
+ margin-right: 5vw;
  background: transparent linear-gradient(68deg, #F97F6A 0%, #F1BA67D9 100%) 0% 0% no-repeat padding-box;
- border-radius: 20px 0px 0px 20px;
  border: none;
  color: #ffffff;
- font-size: 25px;
+ font-size: 20px;
  outline: none;
- border-radius: 20px 0 0 20px;
+ display: none;
 }
 
 /* ====== home ====== */
@@ -80,28 +81,38 @@ header {
   position: absolute;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.05);
-}
-
-.home-menu {
-  width: 150px;
-  height: 40px;
-  position: absolute;
-  right: 0;
-  bottom: 10%;
-  background: transparent linear-gradient(84deg, #5A79BA 0%, #59BECAD9 100%) 0% 0% no-repeat padding-box;
-  border-radius: 20px 0px 0px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-}
-
-.home-menu ul {
-  /* display: flex; */
+  background: rgba(0, 0, 0, 0.2);
   display: none;
-  justify-content: space-between;
-  list-style: none;
+}
+
+.menu-list button {
+  color: #ffffff;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  text-align: center;
+  line-height: 30px;
+  transition: all 1s ease;
+}
+
+.menu-button {
+  width: 250px;
+  height: 30px;
+  position: absolute;
+  right: 5vw;
+  bottom: 100px;
+  z-index: 10;
+  background: transparent linear-gradient(84deg, #5A79BA 0%, #59BECAD9 100%) 0% 0% no-repeat padding-box;
+
+}
+
+.hide-button {
+  height: 30px;
+  position: absolute;
+  right: 5vw;
+  bottom: 100px;
+  opacity: 0;
+  background: transparent;
 }
 
 /* ====== about ====== */
