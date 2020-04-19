@@ -23,6 +23,7 @@ $(function() {
                     $(".opening").fadeOut();
                     $(".home").fadeIn(1500);
                     $(".home-wrapper").fadeIn(3000);
+                    $(".menu-button").css("opacity", "1");
                     $("header").fadeIn(3000);
                     $("header").css("display", "flex");
                 }
@@ -36,6 +37,7 @@ $(function() {
         $(".opening").hide();
         $(".home").fadeIn(1500);
         $(".home-wrapper").fadeIn(3000);
+        $(".menu-button").css("opacity", "1");
         $("header").fadeIn(3000);
         $("header").css("display", "flex");
     } else {
