@@ -86,7 +86,7 @@ $(".menu-list button").on("click", function() {
     var length = array.length;
     for(var i = 0; i < length; i++) {
         if($(this).data("id") === array[i]) {
-            $("." + array[i]).fadeIn(1000);
+            $("." + array[i]).css("display", "flex");
             $(".home").fadeOut(1000);
             $(".home-button").fadeIn(1000);
 

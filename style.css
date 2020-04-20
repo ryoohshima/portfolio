@@ -5,6 +5,15 @@
   font-style: italic;
 }
 
+.section-title {
+  display: inline-block;
+  transform: rotate(270deg);
+}
+
+.section-title h2 {
+  font-size: 50px;
+}
+
 /* ====== opening ====== */
 .opening {
   width: 100vw;
@@ -118,59 +127,44 @@ header {
 /* ====== about ====== */
 .about {
   width: 100vw;
-  height: 100vh;
-  /* display: flex; */
+  margin-top: 100px;
+  height: calc(100vh - 100px);
   display: none;
-  padding-top: 100px;
+  align-items: center;
 }
 
 .about-visual {
-  width: 25%;
   height: calc(100vh - 200px);
-  margin-left: 60px;
 }
 
 .about-visual img {
-  width: 100%;
+  height: 100%;
 }
 
 .about-wrapper {
-  width: 75%;
-  padding-left: 100px;
+  height: 50vh;
+  padding: 0 100px;
 }
 
-.about-title {
-  display: inline-block;
-  border-bottom: 10px dotted #5A79BA;
-}
-
-.about-title h2 {
-  font-size: 50px;
-}
-
-.about-contents {
-  margin-top: 50px;
-  padding-right: 50px;
-}
-
-.about-name {
-  margin-bottom: 30px;
-}
-
-.about-contents p {
+.about-wrapper h3 {
+  margin-bottom: 50px;
   font-size: 35px;
-  line-height: 60px;
+}
+
+.about-wrapper p {
+  font-size: 25px;
+  line-height: 50px;
+  font-style: normal;
 }
 
 .twitter {
-  margin-top: 30px;
+  margin-top: 50px;
   display: flex;
-  align-items: flex-end;
 }
 
 .twitter a {
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   background: transparent linear-gradient(60deg, #5A79BA 0%, #59BECAD9 100%) 0% 0% no-repeat padding-box;
   display: flex;
@@ -181,25 +175,18 @@ header {
 }
 
 .twitter p {
-  font-size: 35px;
+  margin-left: 10px;
+  font-size: initial;
+  font-style: italic;
 }
 
 /* ====== skills ====== */
 .skills {
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 100px);
   padding-top: 100px;
   text-align: center;
   display: none;
-}
-
-.skills-title {
-  display: inline-block;
-  border-bottom: 10px dotted #5A79BA;
-}
-
-.skills-title h2 {
-  font-size: 50px;
 }
 
 .skills-list {
@@ -234,15 +221,6 @@ header {
   display: none;
 }
 
-.works-title {
-  display: inline-block;
-  border-bottom: 10px dotted #5A79BA;
-}
-
-.works-title h2 {
-  font-size: 50px;
-}
-
 .works-list {
   height: calc(100vh - 160px);
   margin-top: 10px;
@@ -268,15 +246,6 @@ header {
   color: #ffffff;
   background: transparent linear-gradient(60deg, #5A79BA 0%, #59BECAD9 100%) 0% 0% no-repeat padding-box;
   display: none;
-}
-
-.contact-title {
-  display: inline-block;
-  border-bottom: 10px dotted #ffffff;
-}
-
-.contact-title h2 {
-  font-size: 50px;
 }
 
 .contact form {
