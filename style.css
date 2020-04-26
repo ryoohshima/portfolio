@@ -1,3 +1,7 @@
+/* ============================
+            all
+============================ */
+
 * {
   margin: 0;
   padding: 0;
@@ -6,6 +10,7 @@
 }
 
 .section-title {
+  height: 50px;
   display: inline-block;
   transform: rotate(270deg);
 }
@@ -14,7 +19,9 @@
   font-size: 50px;
 }
 
-/* ====== opening ====== */
+/* ============================
+            opening
+============================ */
 .opening {
   width: 100vw;
   height: 100vh;
@@ -30,7 +37,9 @@
   display: none;
 }
 
-/* ====== header ====== */
+/* ============================
+            header
+============================ */
 header {
   width: 100vw;
   height: 100px;
@@ -68,7 +77,9 @@ header {
  display: none;
 }
 
-/* ====== home ====== */
+/* ============================
+            home
+============================ */
 .home {
   display: none;
   width: 100vw;
@@ -123,8 +134,9 @@ header {
   opacity: 0;
   background: transparent;
 }
-
-/* ====== about ====== */
+/* ============================
+            about
+============================ */
 .about {
   width: 100vw;
   margin-top: 100px;
@@ -152,8 +164,8 @@ header {
 }
 
 .about-wrapper p {
-  font-size: 25px;
-  line-height: 50px;
+  font-size: 20px;
+  line-height: 40px;
   font-style: normal;
 }
 
@@ -180,12 +192,15 @@ header {
   font-style: italic;
 }
 
-/* ====== skills ====== */
+/* ============================
+            skills
+============================ */
 .skills {
   width: 100vw;
   height: calc(100vh - 100px);
   padding-top: 100px;
   text-align: center;
+  align-items: center;
   display: none;
 }
 
@@ -208,36 +223,46 @@ header {
 }
 
 .skills-list p {
- font-size: 25px;
- line-height: 45px;
+ font-size: 20px;
+ font-style: normal;
+ line-height: 40px;
 }
 
-/* ====== works ====== */
+/* ============================
+            works
+============================ */
 .works {
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 100px);
   padding-top: 100px;
   text-align: center;
+  align-items: center;
+  justify-content: space-around;
   display: none;
 }
 
 .works-list {
-  height: calc(100vh - 160px);
-  margin-top: 10px;
-  overflow: scroll;
+  width: calc(100vw - 200px);
+  display: flex;
 }
 
-.works-list section {
-  width: 1000px;
-  margin: 0 auto;
-  padding: 15px 0;
+.works-list ul {
+  overflow-x: scroll;
+}
+
+.works-list li {
+  display: inline-block;
+  width: 90%;
+  margin: 10px;
 }
 
 .works-list img {
   width: 100%;
 }
 
-/* ====== contact ====== */
+/* ============================
+            contact
+============================ */
 .contact {
   width: 100vw;
   height: 100vh;

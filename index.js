@@ -88,6 +88,7 @@ $(".menu-list button").on("click", function() {
         if($(this).data("id") === array[i]) {
             $("." + array[i]).css("display", "flex");
             $(".home").fadeOut(1000);
+            $(".header-wrapper").css("visibility", "hidden");
             $(".home-button").fadeIn(1000);
 
         }
@@ -106,6 +107,7 @@ $(".home-button").on("click", function() {
     for(var i = 0; i < length; i++) {
         $(array[i]).fadeOut(1000);
         $(".home").fadeIn(1000);
+        $(".header-wrapper").css("visibility", "visible");
         $(".home-button").fadeOut(1000);
         $(".menu-list button").css("bottom", "100px");
         $(".hide-button").css("opacity", "0");
