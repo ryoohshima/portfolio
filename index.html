@@ -42,7 +42,6 @@
                     <button class="skills-button hide-button" data-id="skills">skills</button>
                     <button class="works-button hide-button" data-id="works">works</button>
                     <button class="contact-button hide-button" data-id="contact">contact</button>
-                    <button class="close-button hide-button">close</button>
                 </div>
             </div>
         </div>
@@ -127,15 +126,19 @@
                 <h2>Contact</h2>
             </div>
             <form>
-                <dl>
-                    <dt>NAME</dt>
-                    <dd><input type="text"></dd>
-                    <dt>E-MAIL</dt>
-                    <dd><input type="text"></dd>
-                    <dt>MESSAGE</dt>
-                    <dd><textarea></textarea></dd>
-                </dl>
-                <div>
+                <div class="contact-items">
+                    <p>NAME</p>
+                    <input type="text">
+                </div>
+               <div class="contact-items">
+                    <p>E-MAIL</p>
+                    <input type="text">
+               </div>
+                <div class="contact-items">
+                    <p>MESSAGE</p>
+                    <textarea></textarea>
+                </div>
+                <div class="contact-send-button">
                     <button>SEND</button>
                 </div>
             </form>

@@ -235,25 +235,26 @@ header {
   width: 100vw;
   height: calc(100vh - 100px);
   padding-top: 100px;
-  text-align: center;
   align-items: center;
-  justify-content: space-around;
   display: none;
 }
 
 .works-list {
-  width: calc(100vw - 200px);
+  width: calc(100vw - 260px);
+  min-width: 1000px;
   display: flex;
 }
 
 .works-list ul {
   overflow-x: scroll;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
 }
 
 .works-list li {
   display: inline-block;
-  width: 90%;
-  margin: 10px;
+  width: 30%;
+  margin: auto 2%;
 }
 
 .works-list img {
@@ -265,45 +266,59 @@ header {
 ============================ */
 .contact {
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 100px);
   padding-top: 100px;
-  text-align: center;
   color: #ffffff;
   background: transparent linear-gradient(60deg, #5A79BA 0%, #59BECAD9 100%) 0% 0% no-repeat padding-box;
   display: none;
+  align-items: center;
 }
 
 .contact form {
-  width: 1000px;
-  margin: 10px auto;
+  width: calc(100vw - 160px);
+  min-width: 1000px;
 }
 
-.contact dt {
-  width: 200px;
-  float: left;
-  margin-bottom: 10px;
-  margin-left: -100px;
+.contact-items {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
-.contact dd {
-  width: 800px;
-  margin-left: 100px;
-  margin-bottom: 10px;
+.contact-items p {
+  width: 100px;
+  text-align: center;
 }
 
 .contact input {
   width: 800px;
-  height: 50px;
+  height: 30px;
+  padding: 10px;
+  border: none;
+  font-size: 20px;
+  font-style: normal;
 }
 
 .contact textarea {
   width: 800px;
   height: 300px;
+  padding: 10px;
+  border: none;
+  font-size: 20px;
+  font-style: normal;
+  resize: none;
+}
+
+.contact-send-button {
+  width: calc(100vw - 160px);
+  text-align: right;
 }
 
 .contact button {
+  margin-right: calc((100vw - 160px - 920px) / 2);
   border: none;
+  outline: none;
   background-color: transparent;
-  font-size: 25px;
   color: #ffffff;
+  font-size: 20px;
 }
