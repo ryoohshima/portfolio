@@ -13,20 +13,20 @@ $(function() {
         ]
         $(".opening p").hide();
         var i = 0;
-        $(".opening-" + array[i]).slideDown("slow");
+        $(".opening-" + array[i]).fadeIn();
         var openingShow = function() {
             if($(".opening-" + array[i]).css("display") === "none") {
-                $(".opening-" + array[i]).slideDown("slow");
+                $(".opening-" + array[i]).fadeIn();
             } else {
-                $(".opening-" + array[i]).slideUp("slow");
+                $(".opening-" + array[i]).fadeOut();
                 i ++;
                 if(i > array.length) {
                     i = "";
                     clearInterval(setIntervalShow);
                     $(".opening").fadeOut();
                     $(".home").fadeIn(1500);
-                    $(".home-wrapper").fadeIn(2000);
-                    $("header").fadeIn(2000);
+                    $(".home-wrapper").fadeIn(5000);
+                    $("header").fadeIn(5000);
                     $("header").css("display", "flex");
                 }
             }
@@ -38,8 +38,8 @@ $(function() {
     if(name === "true") {
         $(".opening").hide();
         $(".home").fadeIn(1500);
-        $(".home-wrapper").fadeIn(3000);
-        $("header").fadeIn(3000);
+        $(".home-wrapper").fadeIn(5000);
+        $("header").fadeIn(5000);
         $("header").css("display", "flex");
     } else {
         // Cookieを作成
@@ -91,52 +91,30 @@ $(".menu-list button").on("click", function() {
     var length = array.length;
     for(var i = 0; i < length; i++) {
         if($(this).data("id") === array[i]) {
-            $("." + array[i]).css("display", "flex");
             $(".home").fadeOut(1000);
             $(".header-wrapper").css("visibility", "hidden");
             $(".home-button").fadeIn(1000);
-
+            $("." + array[i]).css("display", "flex");
         }
     }
 });
 
 // ホームボタンがクリックされた時
 $(".home-button").on("click", function() {
-    array = [
-        ".about",
-        ".skills",
-        ".works",
-        ".contact"
-    ]
-    var length = array.length;
-    for(var i = 0; i < length; i++) {
-        $(array[i]).fadeOut(1000);
-        $(".home").fadeIn(1000);
-        $(".header-wrapper").css("visibility", "visible");
-        $(".home-button").fadeOut(1000);
-        $(".menu-list button").css("bottom", "100px");
-        $(".hide-button").css("opacity", "0");
-    }
+   location.reload();
 });
 
 // ============================
 //            works
 // ============================
-let list = $(".works-list li");
-$(".works-button").on("click", function() {
-    $(list[0]).css("width", "80%");
+$(".works-list li").on("click", function() {
+    var image = $(this).find("img").attr("src");
+    var id = $(this).find("img").attr("alt");
+    if(id === "comingsoon") {
+        $(".works-display-inner").html('<img src="' + image + '">');
+        console.log("baka");
+    } else {
+        $(".works-display-inner").html('<a href="./' + id + '/index.html" target="_blank" rel="noopener noreferrer"><img src="' + image + '">');
+        console.log("hoge");
+    }
 });
-//     for(var i = 0; i < list.length; i++) {
-//         let offset = $(list[i]).offset().left;
-//         let leftPos = $(window).width() / 4;
-//         let centerPos = $(window).width() / 2;
-//         if(offset < leftPos) {
-//             $(list[i]).css("width", "30%");
-//         }
-//         else if (leftPos <= offset < centerPos) {
-//             $(list[i]).css("width", "80%");
-//         }
-//         else if (centerPos <= offset) {
-//             $(list[i]).css("width", "30%");
-//         }
-//     }
