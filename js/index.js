@@ -12,21 +12,23 @@ $(function() {
         ]
         $(".opening p").hide();
         var i = 0;
-        $(".opening-" + array[i]).shuffleEffect();
+        $(".opening-" + array[i]).show().shuffleLetters();
         var openingShow = function() {
             if($(".opening-" + array[i]).css("display") === "none") {
-                $(".opening-" + array[i]).fadeIn();
+                $(".opening-" + array[i - 1]).hide();
+                $(".opening-" + array[i]).show();
+                $(".opening-" + array[i]).shuffleLetters();
             } else {
-                $(".opening-" + array[i]).fadeOut();
                 i ++;
                 if(i > array.length) {
-                    i = "";
-                    clearInterval(setIntervalShow);
-                    $(".opening").fadeOut();
-                    $(".home").fadeIn(1500);
+                    $(".opening-" + array[i - 2]).text("I am the most omniscient and omnipotent").shuffleLetters().animate({"font-size": "25em"}, 2000);
+                    $(".opening").fadeOut(1000);
+                    $(".home").fadeIn(3000);
                     $(".home-wrapper").fadeIn(5000);
                     $("header").fadeIn(5000);
                     $("header").css("display", "flex");
+                    clearInterval(setIntervalShow);
+                    i = "";
                 }
             }
         }
