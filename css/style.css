@@ -27,7 +27,7 @@
   height: 100vh;
   display: flex;
   align-items: center;
-  background: transparent linear-gradient(60deg, #5A79BA 0%, #59BECAD9 100%) 0% 0% no-repeat padding-box;
+  background: transparent linear-gradient(60deg, #000000 0%, #ffffff 150%) 0% 0% no-repeat padding-box;
 }
 
 .opening p {

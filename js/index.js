@@ -8,12 +8,11 @@ $(function() {
         var array = [
             "hello",
             "name",
-            "job",
             "title"
         ]
         $(".opening p").hide();
         var i = 0;
-        $(".opening-" + array[i]).fadeIn();
+        $(".opening-" + array[i]).shuffleEffect();
         var openingShow = function() {
             if($(".opening-" + array[i]).css("display") === "none") {
                 $(".opening-" + array[i]).fadeIn();
