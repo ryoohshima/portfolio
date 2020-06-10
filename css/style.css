@@ -19,6 +19,13 @@
   font-size: 50px;
 }
 
+.about-wrap,
+.skills-wrap,
+.works-wrap,
+.contact-wrap {
+  display: none;
+}
+
 /* ============================
             opening
 ============================ */
@@ -40,13 +47,17 @@
             header
 ============================ */
 header {
-  width: 100vw;
-  height: 100px;
+  display: none;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 10;
-  display: none;
+}
+
+.header {
+  width: 100vw;
+  height: 100px;
+  display: flex;
   align-items: center;
   justify-content: space-between;
 }
@@ -58,17 +69,19 @@ header {
 
 .header-name {
   font-size: 40px;
+  text-shadow: 1px 2px 3px #808080;
 }
 
 .header-job {
   font-size: 30px;
+  text-shadow: 1px 2px 3px #808080;
 }
 
 .home-button {
  width: 150px;
  height: 30px;
  margin-right: 5vw;
- background: transparent linear-gradient(68deg, #F97F6A 0%, #F1BA67D9 100%) 0% 0% no-repeat padding-box;
+ background: transparent linear-gradient(84deg, #5A79BA 0%, #59BECAD9 100%) 0% 0% no-repeat padding-box;
  border: none;
  color: #ffffff;
  font-size: 20px;
@@ -100,7 +113,6 @@ header {
   position: absolute;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.2);
   display: none;
 }
 
@@ -112,6 +124,7 @@ header {
   text-align: center;
   line-height: 30px;
   transition: all 1s ease;
+  text-shadow: 1px 2px 3px #808080;
 }
 
 .menu-button {
@@ -140,7 +153,7 @@ header {
   width: 100vw;
   margin-top: 100px;
   height: calc(100vh - 100px);
-  display: none;
+  display: flex;
   align-items: center;
 }
 
@@ -200,7 +213,7 @@ header {
   padding-top: 100px;
   text-align: center;
   align-items: center;
-  display: none;
+  display: flex;
 }
 
 .skills-list {
@@ -235,7 +248,7 @@ header {
   height: calc(100vh - 100px);
   padding-top: 100px;
   align-items: center;
-  display: none;
+  display: flex;
 }
 
 .works-list {
@@ -287,8 +300,8 @@ header {
   height: calc(100vh - 100px);
   padding-top: 100px;
   color: #ffffff;
-  background: transparent linear-gradient(60deg, #5A79BA 0%, #59BECAD9 100%) 0% 0% no-repeat padding-box;
-  display: none;
+  background: transparent linear-gradient(60deg, #000000 0%, #ffffff 150%) 0% 0% no-repeat padding-box;
+  display: flex;
   align-items: center;
 }
 
