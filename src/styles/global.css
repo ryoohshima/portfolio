@@ -1,8 +1,18 @@
 @import "tailwindcss";
 
+@theme {
+  --z-index-header: 100;
+}
+
 @layer base {
   html {
     /*アンカーリンク用*/
     scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-slate-950 text-slate-300 antialiased;
+  }
+  a {
+    @apply text-slate-300 hover:text-slate-500 transition-colors;
   }
 }
