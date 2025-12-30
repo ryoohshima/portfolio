@@ -1,25 +1,69 @@
-<section>
-  <div>
-    <h2>PROJECTS</h2>
-  </div>
-  <div>
-    <article>
-      <img src="" alt="" />
-      <h3>portfolio site</h3>
-      <p>hogehoge</p>
-      <a href=""></a>
-    </article>
-    <article>
-      <img src="" alt="" />
-      <h3>portfolio site</h3>
-      <p>hogehoge</p>
-      <a href=""></a>
-    </article>
-    <article>
-      <img src="" alt="" />
-      <h3>portfolio site</h3>
-      <p>hogehoge</p>
-      <a href=""></a>
-    </article>
+---
+import { fade, slide } from "astro:transitions";
+import { projects } from "@/data/projects";
+---
+
+<section
+  id="projects"
+  aria-labelledby="projects-title"
+  class="py-20"
+  transition:animate={fade({ duration: "0.3s" })}
+>
+  <div class="max-w-6xl mx-auto px-4">
+    <h2
+      id="projects-title"
+      class="text-3xl font-bold mb-12 text-center"
+      transition:animate={slide({ duration: "0.4s" })}
+    >
+      PROJECTS
+    </h2>
+    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {
+        projects.map((project, index) => (
+          <li
+            transition:animate={fade({ duration: `${0.3 + index * 0.1}s` })}
+          >
+            <a href={`/projects/${project.slug}`} class="block h-full">
+              <article class="h-full rounded-2xl bg-slate-900 overflow-hidden hover:ring-2 hover:ring-slate-700 transition-all hover:scale-[1.02]">
+                <div
+                  class="w-full aspect-video bg-slate-800 flex items-center justify-center"
+                  transition:name={`project-image-${project.slug}`}
+                >
+                  <span class="text-slate-600 text-sm">No Image</span>
+                </div>
+                <div class="p-6">
+                  <h3
+                    class="text-xl font-semibold mb-2"
+                    transition:name={`project-title-${project.slug}`}
+                  >
+                    {project.title}
+                  </h3>
+                  <p class="text-sm mb-4">{project.description}</p>
+                  {project.tags && (
+                    <ul class="flex flex-wrap gap-2 mb-4">
+                      {project.tags.map((tag) => (
+                        <li class="text-xs px-2 py-1 bg-slate-800 rounded-full text-slate-400">
+                          {tag}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  <div class="flex gap-4">
+                    {project.url && (
+                      <span class="text-sm hover:text-slate-50">
+                        View Site →
+                      </span>
+                    )}
+                    {project.github && (
+                      <span class="text-sm hover:text-slate-50">GitHub →</span>
+                    )}
+                  </div>
+                </div>
+              </article>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </section>

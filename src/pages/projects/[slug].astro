@@ -1,0 +1,98 @@
+---
+import { fade, slide } from "astro:transitions";
+import Layout from "@/layouts/Layout.astro";
+import { projects, getProjectBySlug } from "@/data/projects";
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const project = getProjectBySlug(slug);
+
+if (!project) {
+  return Astro.redirect("/404");
+}
+---
+
+<Layout title={`${project.title} | Portfolio`} description={project.description}>
+  <main class="min-h-screen pt-24 pb-20">
+    <div class="max-w-4xl mx-auto px-4">
+      <!-- 戻るリンク -->
+      <a
+        href="/#projects"
+        class="inline-flex items-center gap-2 mb-8 hover:text-slate-100"
+        transition:animate="none"
+      >
+        ← Back to Projects
+      </a>
+
+      <!-- プロジェクト画像（transition:nameでカードとリンク） -->
+      <div
+        class="w-full aspect-video bg-slate-800 rounded-2xl mb-8 flex items-center justify-center"
+        transition:name={`project-image-${project.slug}`}
+      >
+        <span class="text-slate-600">Project Image</span>
+      </div>
+
+      <!-- タイトル（transition:nameでカードとリンク） -->
+      <h1
+        class="text-4xl md:text-5xl font-bold mb-4"
+        transition:name={`project-title-${project.slug}`}
+      >
+        {project.title}
+      </h1>
+
+      <!-- タグ（slideアニメーション） -->
+      {project.tags && (
+        <ul
+          class="flex flex-wrap gap-2 mb-8"
+          transition:animate={slide({ duration: "0.3s" })}
+        >
+          {project.tags.map((tag) => (
+            <li class="text-sm px-3 py-1 bg-slate-800 rounded-full text-slate-400">
+              {tag}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <!-- 説明文（fadeアニメーション） -->
+      <p
+        class="text-lg text-slate-300 mb-8 leading-relaxed"
+        transition:animate={fade({ duration: "0.4s" })}
+      >
+        {project.longDescription || project.description}
+      </p>
+
+      <!-- リンク -->
+      <div
+        class="flex gap-6"
+        transition:animate={fade({ duration: "0.5s" })}
+      >
+        {project.url && (
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-6 py-3 bg-slate-100 text-slate-900 rounded-lg font-medium hover:bg-slate-200 transition-colors"
+          >
+            View Site →
+          </a>
+        )}
+        {project.github && (
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-6 py-3 border border-slate-700 rounded-lg hover:bg-slate-800 transition-colors"
+          >
+            GitHub →
+          </a>
+        )}
+      </div>
+    </div>
+  </main>
+</Layout>
