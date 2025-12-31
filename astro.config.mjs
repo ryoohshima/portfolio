@@ -5,13 +5,16 @@ import icon from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com', // TODO: 本番URLに変更してください
+  site: 'https://ryoohshima.dev',
+
   trailingSlash: 'never',
   compressHTML: true,
   integrations: [icon()],
+
   build: {
     inlineStylesheets: 'auto',
   },
+
   vite: {
     plugins: [tailwindcss()],
     build: {
