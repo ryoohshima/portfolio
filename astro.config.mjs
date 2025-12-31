@@ -5,7 +5,7 @@ import icon from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://ryoohshima.dev',
+  site: 'https://ryoohshima.com',
 
   trailingSlash: 'never',
   compressHTML: true,
