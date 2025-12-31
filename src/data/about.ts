@@ -7,33 +7,33 @@ export interface Experience {
 
 export const profile = {
   name: "Ryo Ohshima",
-  title: "WEB DEVELOPER",
-  bio: "Web開発に情熱を持つエンジニアです。ユーザー体験を重視したモダンなWebアプリケーションの開発を得意としています。",
+  title: "FE ENGINEER",
+  bio: "FEエンジニアとして活動しています。新卒ではオウンドメディアの運営やライティングをしていましたが、縁あって途中でエンジニアとなりました。",
 };
 
 export const experiences: Experience[] = [
   {
-    period: "2023 - 現在",
-    title: "Webエンジニア",
-    company: "株式会社サンプル",
-    description: "フロントエンド開発を中心に、React/Next.jsを使用したWebアプリケーション開発に従事。",
+    period: "2022 - 現在",
+    title: "FEエンジニア",
+    company: "株式会社ニジボックス",
+    description: "親会社であるリクルートのサービスの開発",
   },
   {
-    period: "2021 - 2023",
-    title: "ジュニアエンジニア",
-    company: "テック株式会社",
-    description: "Webサイト制作やCMS構築を担当。HTML/CSS/JavaScriptの基礎を習得。",
+    period: "2020 - 2022",
+    title: "FEエンジニア",
+    company: "アクトデザインラボ株式会社",
+    description: "自社HPの実装や受託開発など",
   },
   {
-    period: "2017 - 2021",
-    title: "情報工学科",
-    company: "サンプル大学",
-    description: "コンピュータサイエンスの基礎を学習。卒業研究ではWebアプリケーション開発に取り組む。",
+    period: "2017 - 2020",
+    title: "WEBメディアのライター・運営",
+    company: "アクトデザインラボ株式会社",
+    description: "記事のライティングやサイトのマネタイズ、企画、取材など",
   },
 ];
 
 export const iconDescription = {
   title: "Profile Icon",
   description:
-    "このアイコンは、シンプルでモダンなデザインをコンセプトに作成しました。ミニマルな線で構成されたプロフィールアイコンは、クリーンなWebデザインへのこだわりを表現しています。",
+    "イニシャルと我が家に伝わる家紋、自分の名前を組み合わせてシンプルでもモダンなデザインをコンセプトに作成しました。",
 };
