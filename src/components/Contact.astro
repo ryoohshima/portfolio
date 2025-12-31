@@ -1,22 +1,77 @@
-<section>
-  <div>
-    <h2>CONTACT</h2>
+---
+import { Icon } from "astro-icon/components";
+import { fade, slide } from "astro:transitions";
+
+interface ContactLink {
+  name: string;
+  icon: string;
+  href: string;
+  label: string;
+}
+
+const contacts: ContactLink[] = [
+  {
+    name: "GitHub",
+    icon: "simple-icons:github",
+    href: "https://github.com/username",
+    label: "GitHubプロフィール",
+  },
+  {
+    name: "X",
+    icon: "simple-icons:x",
+    href: "https://x.com/username",
+    label: "Xアカウント",
+  },
+  {
+    name: "LinkedIn",
+    icon: "simple-icons:linkedin",
+    href: "https://linkedin.com/in/username",
+    label: "LinkedInプロフィール",
+  },
+  {
+    name: "Email",
+    icon: "simple-icons:gmail",
+    href: "mailto:example@example.com",
+    label: "メールを送る",
+  },
+];
+---
+
+<section
+  id="contact"
+  aria-labelledby="contact-title"
+  class="py-20"
+  transition:animate={fade({ duration: "0.3s" })}
+>
+  <div class="max-w-6xl mx-auto px-4">
+    <h2
+      id="contact-title"
+      class="text-3xl font-bold mb-12 text-center"
+      transition:animate={slide({ duration: "0.4s" })}
+    >
+      CONTACT
+    </h2>
+    <ul class="flex justify-center gap-8">
+      {
+        contacts.map((contact, index) => (
+          <li transition:animate={fade({ duration: `${0.3 + index * 0.1}s` })}>
+            <a
+              href={contact.href}
+              target={contact.href.startsWith("mailto:") ? undefined : "_blank"}
+              rel={
+                contact.href.startsWith("mailto:")
+                  ? undefined
+                  : "noopener noreferrer"
+              }
+              aria-label={contact.label}
+              class="flex flex-col items-center gap-2 p-4 rounded-2xl hover:bg-slate-900 transition-[background-color,transform] duration-300 hover:scale-105"
+            >
+              <Icon name={contact.icon} class="w-10 h-10" />
+              <span class="text-sm">{contact.name}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </div>
-  <ul>
-    <li>
-      <a href="">
-        <img src="" alt="" />
-      </a>
-    </li>
-    <li>
-      <a href="">
-        <img src="" alt="" />
-      </a>
-    </li>
-    <li>
-      <a href="">
-        <img src="" alt="" />
-      </a>
-    </li>
-  </ul>
 </section>
