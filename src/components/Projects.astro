@@ -1,6 +1,27 @@
 ---
 import { fade, slide } from "astro:transitions";
+import { Image } from "astro:assets";
 import { projects } from "@/data/projects";
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "@/assets/images/projects/*.{png,jpg,jpeg,webp}"
+);
+
+async function getProjectImage(slug: string) {
+  const path = `/src/assets/images/projects/${slug}.png`;
+  if (images[path]) {
+    const image = await images[path]();
+    return image.default;
+  }
+  return null;
+}
+
+const projectsWithImages = await Promise.all(
+  projects.map(async (project) => ({
+    ...project,
+    image: await getProjectImage(project.slug),
+  }))
+);
 ---
 
 <section
@@ -20,17 +41,27 @@ import { projects } from "@/data/projects";
     </h2>
     <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {
-        projects.map((project, index) => (
+        projectsWithImages.map((project, index) => (
           <li
             transition:animate={fade({ duration: `${0.3 + index * 0.1}s` })}
           >
             <a href={`/projects/${project.slug}`} class="block h-full">
               <article class="h-full rounded-2xl bg-slate-900 overflow-hidden hover:ring-2 hover:ring-slate-700 transition-all hover:scale-[1.02]">
                 <div
-                  class="w-full aspect-video bg-slate-800 flex items-center justify-center"
+                  class="w-full aspect-video bg-slate-800 overflow-hidden"
                   transition:name={`project-image-${project.slug}`}
                 >
-                  <span class="text-slate-600 text-sm">No Image</span>
+                  {project.image ? (
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      class="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div class="w-full h-full flex items-center justify-center">
+                      <span class="text-slate-600 text-sm">No Image</span>
+                    </div>
+                  )}
                 </div>
                 <div class="p-6">
                   <h3

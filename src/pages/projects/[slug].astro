@@ -1,7 +1,21 @@
 ---
 import { fade, slide } from "astro:transitions";
+import { Image } from "astro:assets";
 import Layout from "@/layouts/Layout.astro";
 import { projects, getProjectBySlug } from "@/data/projects";
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "@/assets/images/projects/*.{png,jpg,jpeg,webp}"
+);
+
+async function getProjectImage(slug: string) {
+  const path = `/src/assets/images/projects/${slug}.png`;
+  if (images[path]) {
+    const image = await images[path]();
+    return image.default;
+  }
+  return null;
+}
 
 export function getStaticPaths() {
   return projects.map((project) => ({
@@ -15,6 +29,8 @@ const project = getProjectBySlug(slug);
 if (!project) {
   return Astro.redirect("/404");
 }
+
+const projectImage = await getProjectImage(slug);
 ---
 
 <Layout title={`${project.title} | Portfolio`} description={project.description}>
@@ -31,10 +47,20 @@ if (!project) {
 
       <!-- プロジェクト画像（transition:nameでカードとリンク） -->
       <div
-        class="w-full aspect-video bg-slate-800 rounded-2xl mb-8 flex items-center justify-center"
+        class="w-full aspect-video bg-slate-800 rounded-2xl mb-8 overflow-hidden"
         transition:name={`project-image-${project.slug}`}
       >
-        <span class="text-slate-600">Project Image</span>
+        {projectImage ? (
+          <Image
+            src={projectImage}
+            alt={project.title}
+            class="w-full h-full object-cover"
+          />
+        ) : (
+          <div class="w-full h-full flex items-center justify-center">
+            <span class="text-slate-600">Project Image</span>
+          </div>
+        )}
       </div>
 
       <!-- タイトル（transition:nameでカードとリンク） -->
