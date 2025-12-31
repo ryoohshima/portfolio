@@ -1,0 +1,45 @@
+---
+import { fade, slide } from "astro:transitions";
+import Layout from "@/layouts/Layout.astro";
+import profileSvg from "@/assets/images/profile_white.svg?raw";
+import { iconDescription } from "@/data/about";
+---
+
+<Layout title="Icon | Portfolio" description={iconDescription.description}>
+  <main class="min-h-screen pt-24 pb-20">
+    <div class="max-w-4xl mx-auto px-4">
+      <!-- 戻るリンク -->
+      <a
+        href="/"
+        class="inline-flex items-center gap-2 mb-8 hover:text-slate-100"
+        transition:animate="none"
+      >
+        ← Back
+      </a>
+
+      <!-- アイコン -->
+      <div
+        class="w-64 h-64 md:w-80 md:h-80 mx-auto mb-12 text-slate-300 [&_svg]:w-full [&_svg]:h-full [&_path]:fill-current"
+        transition:name="profile-icon"
+      >
+        <Fragment set:html={profileSvg} />
+      </div>
+
+      <!-- タイトル -->
+      <h1
+        class="text-4xl md:text-5xl font-bold mb-8 text-center"
+        transition:animate={slide({ duration: "0.3s" })}
+      >
+        {iconDescription.title}
+      </h1>
+
+      <!-- 説明文 -->
+      <p
+        class="text-lg text-slate-300 leading-relaxed text-center max-w-2xl mx-auto"
+        transition:animate={fade({ duration: "0.4s" })}
+      >
+        {iconDescription.description}
+      </p>
+    </div>
+  </main>
+</Layout>
