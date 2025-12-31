@@ -1,6 +1,5 @@
 ---
-import { Image } from "astro:assets";
-import profileImage from "@/assets/images/profile.png";
+import profileSvg from "@/assets/images/profile_white.svg?raw";
 
 const profile = {
   name: "Ryo Ohshima",
@@ -19,15 +18,13 @@ const navItems = [
   transition:animate="none"
 >
   <div class="max-w-6xl mx-auto p-4 flex items-center justify-between">
-    <a href="/" class="text-xl font-bold">
-      <Image
-        src={profileImage}
-        alt={`${profile.name}のプロフィール画像`}
-        width={280}
-        height={280}
-        class="w-16 h-16 rounded-full object-cover"
-      /></a
+    <a
+      href="/"
+      class="w-16 h-16 text-slate-300 [&_svg]:w-full [&_svg]:h-full [&_path]:fill-current"
+      aria-label={`${profile.name}のプロフィール`}
     >
+      <Fragment set:html={profileSvg} />
+    </a>
     <nav aria-label="メインナビゲーション">
       <ul class="flex gap-8">
         {
