@@ -7,6 +7,7 @@ interface ContactLink {
   icon: string;
   href: string;
   label: string;
+  color: string;
 }
 
 const contacts: ContactLink[] = [
@@ -15,24 +16,28 @@ const contacts: ContactLink[] = [
     icon: "simple-icons:github",
     href: "https://github.com/username",
     label: "GitHubプロフィール",
+    color: "#FFFFFF",
   },
   {
     name: "X",
     icon: "simple-icons:x",
     href: "https://x.com/username",
     label: "Xアカウント",
+    color: "#FFFFFF",
   },
   {
     name: "LinkedIn",
     icon: "simple-icons:linkedin",
     href: "https://linkedin.com/in/username",
     label: "LinkedInプロフィール",
+    color: "#0A66C2",
   },
   {
     name: "Email",
     icon: "simple-icons:gmail",
     href: "mailto:example@example.com",
     label: "メールを送る",
+    color: "#EA4335",
   },
 ];
 ---
@@ -50,11 +55,15 @@ const contacts: ContactLink[] = [
       transition:animate={slide({ duration: "0.4s" })}
     >
       CONTACT
+      <span class="block w-12 h-1 bg-amber-400 mx-auto mt-4 rounded-full"></span>
     </h2>
     <ul class="flex justify-center gap-8">
       {
         contacts.map((contact, index) => (
-          <li transition:animate={fade({ duration: `${0.3 + index * 0.1}s` })}>
+          <li
+            style={`--brand-color: ${contact.color}`}
+            transition:animate={fade({ duration: `${0.3 + index * 0.1}s` })}
+          >
             <a
               href={contact.href}
               target={contact.href.startsWith("mailto:") ? undefined : "_blank"}
@@ -64,9 +73,9 @@ const contacts: ContactLink[] = [
                   : "noopener noreferrer"
               }
               aria-label={contact.label}
-              class="flex flex-col items-center gap-2 p-4 rounded-2xl hover:bg-slate-900 transition-[background-color,transform] duration-300 hover:scale-105"
+              class="group flex flex-col items-center gap-2 p-4 rounded-2xl hover:bg-slate-900 transition-[background-color,transform] duration-300 hover:scale-105"
             >
-              <Icon name={contact.icon} class="w-10 h-10" />
+              <Icon name={contact.icon} class="w-10 h-10 transition-colors duration-300 group-hover:[color:var(--brand-color)]" />
               <span class="text-sm">{contact.name}</span>
             </a>
           </li>
