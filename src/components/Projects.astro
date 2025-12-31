@@ -16,6 +16,7 @@ import { projects } from "@/data/projects";
       transition:animate={slide({ duration: "0.4s" })}
     >
       PROJECTS
+      <span class="block w-12 h-1 bg-amber-400 mx-auto mt-4 rounded-full"></span>
     </h2>
     <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {
@@ -50,12 +51,12 @@ import { projects } from "@/data/projects";
                   )}
                   <div class="flex gap-4">
                     {project.url && (
-                      <span class="text-sm hover:text-slate-50">
+                      <span class="text-sm hover:text-violet-400 transition-colors">
                         View Site →
                       </span>
                     )}
                     {project.github && (
-                      <span class="text-sm hover:text-slate-50">GitHub →</span>
+                      <span class="text-sm hover:text-violet-400 transition-colors">GitHub →</span>
                     )}
                   </div>
                 </div>
