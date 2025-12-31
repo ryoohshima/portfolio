@@ -1,0 +1,69 @@
+---
+import { fade, slide } from "astro:transitions";
+import Layout from "@/layouts/Layout.astro";
+import profileSvg from "@/assets/images/profile_white.svg?raw";
+import { profile, experiences } from "@/data/about";
+---
+
+<Layout title="About | Portfolio" description={profile.bio}>
+  <main class="min-h-screen pt-24 pb-20">
+    <div class="max-w-4xl mx-auto px-4">
+      <!-- 戻るリンク -->
+      <a
+        href="/"
+        class="inline-flex items-center gap-2 mb-8 hover:text-slate-100"
+        transition:animate="none"
+      >
+        ← Back
+      </a>
+
+      <!-- プロフィールヘッダー -->
+      <div
+        class="flex flex-col md:flex-row items-center gap-8 mb-16"
+        transition:animate={fade({ duration: "0.3s" })}
+      >
+        <div class="w-32 h-32 text-slate-300 [&_svg]:w-full [&_svg]:h-full [&_path]:fill-current">
+          <Fragment set:html={profileSvg} />
+        </div>
+        <div class="text-center md:text-left">
+          <h1 class="text-4xl md:text-5xl font-bold mb-2">{profile.name}</h1>
+          <p class="text-lg tracking-widest text-slate-400">{profile.title}</p>
+        </div>
+      </div>
+
+      <!-- 自己紹介 -->
+      <section class="mb-16" transition:animate={slide({ duration: "0.4s" })}>
+        <h2 class="text-2xl font-bold mb-6">
+          About Me
+          <span class="block w-12 h-1 bg-amber-400 mt-2 rounded-full"></span>
+        </h2>
+        <p class="text-lg text-slate-300 leading-relaxed">{profile.bio}</p>
+      </section>
+
+      <!-- 経歴 -->
+      <section transition:animate={fade({ duration: "0.5s" })}>
+        <h2 class="text-2xl font-bold mb-8">
+          Experience
+          <span class="block w-12 h-1 bg-amber-400 mt-2 rounded-full"></span>
+        </h2>
+        <ul class="space-y-8">
+          {
+            experiences.map((exp, index) => (
+              <li
+                class="relative pl-8 before:absolute before:left-0 before:top-2 before:w-3 before:h-3 before:bg-slate-700 before:rounded-full"
+                transition:animate={fade({ duration: `${0.4 + index * 0.1}s` })}
+              >
+                <p class="text-sm text-slate-500 mb-1">{exp.period}</p>
+                <h3 class="text-xl font-semibold mb-1">{exp.title}</h3>
+                <p class="text-slate-400 mb-2">{exp.company}</p>
+                {exp.description && (
+                  <p class="text-slate-300">{exp.description}</p>
+                )}
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </div>
+  </main>
+</Layout>
