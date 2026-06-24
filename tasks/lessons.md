@@ -27,3 +27,16 @@
   3. remote URL の変更・push は外向きで取り返しがつきにくい。owner/repo を `gh repo view <owner>/<repo>` で**実在確認してから**実行すること（push 先誤りの防止）。
 - **このプロジェクトの確定情報**: 正しい remote は `git@github:ryoohshima/portfolio.git`（SSH エイリアス `github` → github.com、owner は gh アクティブアカウント `ryoohshima`）。デフォルトブランチは `develop`、リポジトリは private。
 - **関連ファイル**: `~/.ssh/config`（Host エイリアス定義）、worktree の `.git/config`（remote.origin.url）。
+
+## サプライチェーン / セキュリティ
+
+### メジャーアップグレードで入る新規パッケージは push 前に一次検証する
+- **状況**: Astro v7 アップグレードの push 後、自動セキュリティレビューが3件を指摘（`@astrojs/markdown-satteri` の suspicious new dependency、`pnpm-workspace.yaml` の release-age バイパス、`@bruits/satteri-*` の見慣れぬスコープのネイティブバイナリ）。
+- **原因**: メジャーバージョンアップで新デフォルト実装（v7 の Rust 製 Markdown エンジン Satteri）が透過的に追加され、`minimumReleaseAgeExclude` で release-age ゲートをバイパスする pnpm-workspace.yaml が自動生成された。新スコープのネイティブバイナリが release-age をバイパスして突然入る外形は、サプライチェーン攻撃と区別がつかない。
+- **再発防止ルール**:
+  1. 依存の release-age バイパス（`minimumReleaseAgeExclude` 等）が自動生成されたら、**push 前に**対象パッケージを npm レジストリで一次検証する: `npm view <pkg> repository.url maintainers` で repository が公式 org（例 `withastro/astro`）か、maintainer が既知のコアメンバーか、本体が直接依存しているか（`npm view <parent> dependencies`）を確認。
+  2. 検証結果（repository・maintainer・親依存・integrity pin の有無）を **PR 本文に明記**し、レビュアーが追跡できるようにする。
+  3. 「公式フレームワークの依存だから安全」と外形だけで決めつけない。release-age バイパス＋新スコープのネイティブバイナリは特に慎重に裏取りする。
+  4. release-age 保護を厳守したい状況では、バイパスせずリリースから一定期間待ってから再 install する選択肢も提示する。
+- **このプロジェクトの確定情報**: `@astrojs/markdown-satteri`（withastro/astro 公式、astro@7 が直接依存）と `@bruits/satteri-*`（Rust 製 Markdown エンジン、Astro コア princesseuh が maintainer）は正規。Astro v7 の新デフォルト Markdown プロセッサ「Sätteri」関連。
+- **関連ファイル**: `pnpm-workspace.yaml`（`minimumReleaseAgeExclude` / `allowBuilds`）、`pnpm-lock.yaml`（integrity ハッシュ）。
