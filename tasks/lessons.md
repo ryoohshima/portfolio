@@ -40,3 +40,20 @@
   4. release-age 保護を厳守したい状況では、バイパスせずリリースから一定期間待ってから再 install する選択肢も提示する。
 - **このプロジェクトの確定情報**: `@astrojs/markdown-satteri`（withastro/astro 公式、astro@7 が直接依存）と `@bruits/satteri-*`（Rust 製 Markdown エンジン、Astro コア princesseuh が maintainer）は正規。Astro v7 の新デフォルト Markdown プロセッサ「Sätteri」関連。
 - **関連ファイル**: `pnpm-workspace.yaml`（`minimumReleaseAgeExclude` / `allowBuilds`）、`pnpm-lock.yaml`（integrity ハッシュ）。
+
+## Astro SSG と microCMS 連携
+
+### Astro v7 の astro:env は server secret で配信物を保護できる
+- **設計**: SSG（output: static）では環境変数をビルド時にのみ解決。`envField.string({ context: 'server', access: 'secret' })` で宣言すると、変数は frontmatter でのみアクセス可能で、クライアント側コードから import 不可になる。
+- **教訓**: API キーを microCMS へのフェッチに使う際、`access: 'secret'` 必須にすることで、配信される静的 HTML/JS に秘密情報が絶対混入しない。env 未設定時にビルドが意図的に失敗するのは仕様で、早期検知できる安全弁。
+- **実装**: `src/lib/microcms.ts` の `import { MICROCMS_API_KEY } from "astro:env/server"` で型安全に取得。ビルド時に静的に解決されるため、配信物のサイズにも影響なし。
+- **補足**: env を `optional: true` にしない限り、未設定時の `astro build` は `[EnvInvalidVariables]` エラーで失敗。これは「本番が壊れた状態で公開されない」保証となり、フォールバック層不要。
+
+### リモート画像最適化は image.domains で許可してから使う
+- **発生**: microCMS の CDN 画像（`images.microcms-assets.io`）を `<Image>` コンポーネントで使う際、`astro.config.mjs` に `image.domains` を設定せずに運用しようとすると、最適化されず生 URL 直リンクになる。
+- **教訓**: `image.domains` に許可ドメインを明示しないと Astro の画像最適化パイプラインが外部 URL を信頼せず、検証をスキップして生 `<img>` にフォールバック。リモート画像は実寸（width/height）がビルド時に確定できないため、メタを CMS が返すなら直接利用してビルド時最適化を有効化する。
+- **実装**: microCMS は画像フィールドで `{ url, width, height }` を返すため、`<Image src={...} width={...} height={...} />` で指定。inferSize を使わずメタ利用の方が追加フェッチ不要で高速。
+
+### getStaticPaths の async + props 化で重複フェッチを排除
+- **パターン**: 詳細ページで `getStaticPaths` で全件取得し、各エントリを `props` で渡すことで、frontmatter での再フェッチが不要になる。詳細ページ表示時に API が 2 度呼ばれるのを防ぐ（1度目: getStaticPaths、2度目: フロントマター）。
+- **活用**: Astro の `type Props` + `Astro.props` で型安全に props を受け取れる。デッドコード（条件分岐・`Astro.redirect` など）も自動削除される。

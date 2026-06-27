@@ -2,35 +2,18 @@
 import { fade, slide } from "astro:transitions";
 import { Image } from "astro:assets";
 import Layout from "@/layouts/Layout.astro";
-import { projects, getProjectBySlug } from "@/data/projects";
+import { getAllProjects, type ProjectEntry } from "@/lib/microcms";
 
-const images = import.meta.glob<{ default: ImageMetadata }>(
-  "@/assets/images/projects/*.{png,jpg,jpeg,webp}"
-);
-
-async function getProjectImage(slug: string) {
-  const path = `/src/assets/images/projects/${slug}.png`;
-  if (images[path]) {
-    const image = await images[path]();
-    return image.default;
-  }
-  return null;
-}
-
-export function getStaticPaths() {
+export async function getStaticPaths() {
+  const projects = await getAllProjects();
   return projects.map((project) => ({
     params: { slug: project.slug },
+    props: { project },
   }));
 }
 
-const { slug } = Astro.params;
-const project = getProjectBySlug(slug);
-
-if (!project) {
-  return Astro.redirect("/404");
-}
-
-const projectImage = await getProjectImage(slug);
+type Props = { project: ProjectEntry };
+const { project } = Astro.props;
 ---
 
 <Layout title={`${project.title} | Portfolio`} description={project.description}>
@@ -50,9 +33,11 @@ const projectImage = await getProjectImage(slug);
         class="w-full aspect-video bg-slate-800 rounded-2xl mb-8 overflow-hidden"
         transition:name={`project-image-${project.slug}`}
       >
-        {projectImage ? (
+        {project.image ? (
           <Image
-            src={projectImage}
+            src={project.image.url}
+            width={project.image.width}
+            height={project.image.height}
             alt={project.title}
             class="w-full h-full object-cover"
           />
