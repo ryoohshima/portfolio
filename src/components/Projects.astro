@@ -1,27 +1,9 @@
 ---
 import { fade, slide } from "astro:transitions";
 import { Image } from "astro:assets";
-import { projects } from "@/data/projects";
+import { getAllProjects } from "@/lib/microcms";
 
-const images = import.meta.glob<{ default: ImageMetadata }>(
-  "@/assets/images/projects/*.{png,jpg,jpeg,webp}"
-);
-
-async function getProjectImage(slug: string) {
-  const path = `/src/assets/images/projects/${slug}.png`;
-  if (images[path]) {
-    const image = await images[path]();
-    return image.default;
-  }
-  return null;
-}
-
-const projectsWithImages = await Promise.all(
-  projects.map(async (project) => ({
-    ...project,
-    image: await getProjectImage(project.slug),
-  }))
-);
+const projects = await getAllProjects();
 ---
 
 <section
@@ -41,7 +23,7 @@ const projectsWithImages = await Promise.all(
     </h2>
     <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {
-        projectsWithImages.map((project, index) => (
+        projects.map((project, index) => (
           <li
             transition:animate={fade({ duration: `${0.3 + index * 0.1}s` })}
           >
@@ -53,7 +35,9 @@ const projectsWithImages = await Promise.all(
                 >
                   {project.image ? (
                     <Image
-                      src={project.image}
+                      src={project.image.url}
+                      width={project.image.width}
+                      height={project.image.height}
                       alt={project.title}
                       class="w-full h-full object-cover"
                     />
