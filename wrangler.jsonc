@@ -1,0 +1,14 @@
+{
+  // Cloudflare Workers (Static Assets) 設定。
+  // 純粋な静的サイト（Astro SSG）ゆえ Worker スクリプトを持たない assets-only 構成。
+  // `main` と `assets.binding` は意図的に書かない。
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ryoohshima-portfolio",
+  "compatibility_date": "2026-06-28",
+  "assets": {
+    // `astro build` の出力先。ここのファイルがそのまま配信される。
+    "directory": "./dist",
+    // 404.html があれば返す（未設置なら通常の 404）。`src/pages/404.astro` 追加時に有効化される。
+    "not_found_handling": "404-page"
+  }
+}
