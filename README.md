@@ -10,7 +10,7 @@ FEエンジニア 大島 龍 のポートフォリオサイトです。
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/) v4
 - **Language**: TypeScript
 - **Icons**: [astro-icon](https://www.astroicon.dev/) (Simple Icons)
-- **Hosting**: Cloudflare Pages
+- **Hosting**: Cloudflare Workers (Static Assets)
 
 ## Features
 
@@ -72,14 +72,16 @@ pnpm preview
 
 ## Deployment
 
-Cloudflare Pages で自動デプロイされます。
+Cloudflare Workers (Static Assets) で自動デプロイされます。設定は [`wrangler.jsonc`](./wrangler.jsonc) に定義されており、`astro build` が出力する `dist/` を assets-only Worker として配信します（Worker スクリプトは持ちません）。
+
+`main` ブランチへの push を [Workers Builds](https://developers.cloudflare.com/workers/ci-cd/builds/) が検知し、自動でビルド・デプロイします。
 
 ### Release Workflow
 
 1. `develop` ブランチで開発
 2. リリースタグ (`v*`) をプッシュ
 3. GitHub Actions が `develop` を `main` にマージ
-4. Cloudflare Pages が `main` ブランチを自動デプロイ
+4. Workers Builds が `main` ブランチを自動デプロイ
 
 ```bash
 # リリース例
